@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 public class StudentRest {
 
     private final StudentService service;
-    
+
     @Inject
     public StudentRest(StudentService service){
         this.service = service;
