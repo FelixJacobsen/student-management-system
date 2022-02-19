@@ -1,6 +1,8 @@
 package se.iths.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -9,20 +11,19 @@ import javax.validation.constraints.Size;
 @Entity
 
 public class Student {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
 
-    private String firstName;
     @NotEmpty(message = "Cannot be empty")
     @Size(min = 2, max = 30,message = "Must be minimum two and maximum 30 symbols")
+    private String firstName;
 
     @NotEmpty(message = "Cannot be empty")
     @Size(min = 2, max = 30,message = "Must be minimum two and maximum 30 symbols")
     private String lastName;
 
-    @Email(regexp = " ")
     @NotEmpty(message = "Cannot be empty")
     private String email;
 

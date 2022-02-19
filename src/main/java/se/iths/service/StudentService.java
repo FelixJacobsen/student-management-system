@@ -1,5 +1,6 @@
 package se.iths.service;
 
+import se.iths.customexception.StudentException;
 import se.iths.entity.Student;
 
 import javax.persistence.EntityManager;
@@ -14,28 +15,28 @@ public class StudentService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public void createStudent(Student student){
+    public void createStudent(Student student) {
         entityManager.persist(student);
     }
 
-    public void deleteStudent(Long id){
-        Student deletedStudent = entityManager.find(Student.class,id);
-        try{
-            entityManager.remove(deletedStudent);
-        }catch (NullPointerException e){
-            System.out.println("Student does not exist");
-        }
+    public void deleteStudent(Long id) {
+        Student deletedStudent = entityManager.find(Student.class, id);
+        if (deletedStudent == null)
+            throw new StudentException(id);
+
+        entityManager.remove(deletedStudent);
+
     }
 
-    public List<Student> getAllStudents(){
-        TypedQuery<Student> findAll = entityManager.createQuery("SELECT s FROM Student s",Student.class);
+    public List<Student> getAllStudents() {
+        TypedQuery<Student> findAll = entityManager.createQuery("SELECT s FROM Student s", Student.class);
         return findAll.getResultList();
     }
 
 
-    public void updateStudent(Student newStudent,Long id){
+    public void updateStudent(Student newStudent, Long id) {
         Student updateStudent = findById(id);
-        if(updateStudent != null){
+        if (updateStudent != null) {
             updateStudent.setFirstName(newStudent.getFirstName());
             updateStudent.setLastName(newStudent.getLastName());
             updateStudent.setEmail(newStudent.getEmail());
@@ -44,8 +45,8 @@ public class StudentService {
         entityManager.persist(newStudent);
     }
 
-    public Student findById(Long id){
-        return entityManager.find(Student.class,id);
+    public Student findById(Long id) {
+        return entityManager.find(Student.class, id);
     }
 
 }
