@@ -49,6 +49,11 @@ public class StudentService {
     }
 
 
+    public Student updateStudentName(String name, Long id){
+        Student student = entityManager.find(Student.class,id);
+        student.setFirstName(name);
+        return entityManager.merge(student);
+    }
 
     public List<Student> findByLastName(String lastName){
         TypedQuery<Student> searchLastName = entityManager.createNamedQuery("Student.findByLastName", Student.class)

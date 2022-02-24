@@ -72,9 +72,6 @@ public class StudentController {
     }
 
 
-
-
-
     @Path("{id}")
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id){
