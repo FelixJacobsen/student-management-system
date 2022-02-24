@@ -22,7 +22,7 @@ public class StudentService {
     public void deleteStudent(Long id) {
         Student deletedStudent = entityManager.find(Student.class, id);
         if (deletedStudent == null)
-            throw new StudentException(id);
+            throw new StudentException();
 
         entityManager.remove(deletedStudent);
 
@@ -49,4 +49,10 @@ public class StudentService {
         return entityManager.find(Student.class, id);
     }
 
+
+    public Student updateStudentName(String name, Long id){
+        Student student = entityManager.find(Student.class,id);
+        student.setFirstName(name);
+        return entityManager.merge(student);
+    }
 }
