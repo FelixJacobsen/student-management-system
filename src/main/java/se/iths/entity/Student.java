@@ -5,9 +5,15 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@NamedQuery(
-        name="Student.findById",
-        query = "SELECT s FROM Student s WHERE s.id = :id")
+@NamedQueries({
+        @NamedQuery(
+                name = "Student.findById",
+                query = "SELECT s FROM Student s WHERE s.id = :id"),
+        @NamedQuery(
+                name = "Student.findByLastName",
+                query = "SELECT s FROM Student s WHERE s.lastName = :lastName")
+})
+
 
 public class Student {
 
@@ -16,11 +22,11 @@ public class Student {
     private Long id;
 
     @NotEmpty(message = "Cannot be empty")
-    @Size(min = 2, max = 30,message = "Must be minimum two and maximum 30 symbols")
+    @Size(min = 2, max = 30, message = "Must be minimum two and maximum 30 symbols")
     private String firstName;
 
     @NotEmpty(message = "Cannot be empty")
-    @Size(min = 2, max = 30,message = "Must be minimum two and maximum 30 symbols")
+    @Size(min = 2, max = 30, message = "Must be minimum two and maximum 30 symbols")
     private String lastName;
 
     @NotEmpty(message = "Cannot be empty")

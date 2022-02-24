@@ -1,6 +1,7 @@
 package se.iths.controller;
 
 
+import se.iths.customexception.ErrorMessageJson;
 import se.iths.customexception.StudentException;
 import se.iths.entity.Student;
 import se.iths.service.StudentService;
@@ -24,7 +25,7 @@ public class StudentController {
     public Response create(Student student, @Context UriInfo uriInfo) {
         try{
             service.createStudent(student);
-        }catch (IllegalArgumentException e){
+        }catch (Exception e){
             System.out.println("Find exception here");
         }
         UriBuilder uriBuilder = uriInfo.getBaseUriBuilder().path(Long.toString(student.getId()));
@@ -37,8 +38,7 @@ public class StudentController {
     public Response getStudent(@PathParam("id") Long id) {
         var getById = service.findById(id);
         if (getById == null)
-            throw new StudentException();
-
+            throw new StudentException(ErrorMessageJson.getById(id));
         return Response.ok(getById).build();
     }
 
@@ -47,6 +47,8 @@ public class StudentController {
     @GET
     public Response getAllStudents() {
         List<Student> allStudents = service.getAllStudents();
+        if(allStudents.isEmpty())
+            throw new StudentException(ErrorMessageJson.getAll());
         return Response.ok(allStudents).build();
     }
 
@@ -59,6 +61,19 @@ public class StudentController {
         return Response.ok(student).build();
     }
 
+    @Path("/search")
+    @GET
+    public Response getByLastName(@QueryParam("lastName") String lastName){
+        List<Student> foundStudents = service.findByLastName(lastName);
+        if(foundStudents.isEmpty()){
+            throw new StudentException(ErrorMessageJson.getByLastName(lastName));
+        }
+        return Response.ok(foundStudents).build();
+    }
+
+
+
+
 
     @Path("{id}")
     @DELETE
@@ -68,7 +83,6 @@ public class StudentController {
         }catch (IllegalArgumentException e){
             System.out.println("Student with id" + id + "does not exist");
         }
-
         return Response.ok().build();
     }
 

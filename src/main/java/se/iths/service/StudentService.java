@@ -1,5 +1,6 @@
 package se.iths.service;
 
+import se.iths.customexception.ErrorMessageJson;
 import se.iths.customexception.StudentException;
 import se.iths.entity.Student;
 
@@ -22,10 +23,8 @@ public class StudentService {
     public void deleteStudent(Long id) {
         Student deletedStudent = entityManager.find(Student.class, id);
         if (deletedStudent == null)
-            throw new StudentException();
-
+            throw new StudentException(ErrorMessageJson.getById(id));
         entityManager.remove(deletedStudent);
-
     }
 
     public List<Student> getAllStudents() {
@@ -50,9 +49,11 @@ public class StudentService {
     }
 
 
-    public Student updateStudentName(String name, Long id){
-        Student student = entityManager.find(Student.class,id);
-        student.setFirstName(name);
-        return entityManager.merge(student);
+
+    public List<Student> findByLastName(String lastName){
+        TypedQuery<Student> searchLastName = entityManager.createNamedQuery("Student.findByLastName", Student.class)
+                .setParameter("lastName",lastName);
+        return searchLastName.getResultList();
     }
+
 }
