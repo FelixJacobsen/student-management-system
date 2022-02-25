@@ -21,7 +21,7 @@ public class ConstraintException implements ExceptionMapper<ConstraintViolationE
                 .entity(exceptions)
                 .build();
     }
-    
+
     private ConstraintExceptionProperties validator(ConstraintViolation<?> constraintViolation) {
         ConstraintExceptionProperties message = new ConstraintExceptionProperties();
         message.setMessage(constraintViolation.getMessage());

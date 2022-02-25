@@ -1,7 +1,6 @@
 package se.iths.service;
 
-import se.iths.customexception.ErrorMessageJson;
-import se.iths.customexception.StudentException;
+import se.iths.entity.PhoneNumber;
 import se.iths.entity.Student;
 
 import javax.persistence.EntityManager;
@@ -22,8 +21,6 @@ public class StudentService {
 
     public void deleteStudent(Long id) {
         Student deletedStudent = entityManager.find(Student.class, id);
-        if (deletedStudent == null)
-            throw new StudentException(ErrorMessageJson.getById(id));
         entityManager.remove(deletedStudent);
     }
 
@@ -36,12 +33,16 @@ public class StudentService {
     public void updateStudent(Student newStudent, Long id) {
         Student updateStudent = findById(id);
         if (updateStudent != null) {
-            updateStudent.setFirstName(newStudent.getFirstName());
-            updateStudent.setLastName(newStudent.getLastName());
-            updateStudent.setEmail(newStudent.getEmail());
-            updateStudent.setPhoneNumber(newStudent.getPhoneNumber());
+            updateStudentProperties(newStudent, updateStudent);
         }
         entityManager.merge(newStudent);
+    }
+
+    private void updateStudentProperties(Student newStudent, Student updateStudent) {
+        updateStudent.setFirstName(newStudent.getFirstName());
+        updateStudent.setLastName(newStudent.getLastName());
+        updateStudent.setEmail(newStudent.getEmail());
+        updateStudent.setPhoneNumber(newStudent.getPhoneNumber());
     }
 
     public Student findById(Long id) {
@@ -55,4 +56,9 @@ public class StudentService {
         return searchLastName.getResultList();
     }
 
+    public void updatePhoneNumber(Long id, PhoneNumber phoneNumber){
+        Student newNumber = findById(id);
+        newNumber.setPhoneNumber(phoneNumber.getPhoneNumber());
+        entityManager.merge(newNumber);
+    }
 }
