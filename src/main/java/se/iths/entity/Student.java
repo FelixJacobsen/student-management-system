@@ -1,6 +1,7 @@
 package se.iths.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -30,6 +31,7 @@ public class Student {
     private String lastName;
 
     @NotEmpty(message = "Cannot be empty")
+    @Email(message = "Not a valid email")
     private String email;
 
     private String phoneNumber;
