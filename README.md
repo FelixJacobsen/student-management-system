@@ -7,7 +7,7 @@ To use this application you simply need to clone/fork this projekt, download Pay
 
 
 # Endpoints
-###POST
+POST
 ```
 - api/v1/students
 
@@ -20,18 +20,18 @@ To use this application you simply need to clone/fork this projekt, download Pay
 }
 Response code: 200 OK
 ```
-###GET ONE
+GET ONE
 ```
 -api/v1/students/{id}
 Response code: 200 OK
 ```
-###GET ALL
+GET ALL
 ```
 -api/v1/students
 Response code: 200 OK
 ```
 
-###GET BY LASTNAME
+GET BY LASTNAME
 ```
 -api/v1/students/search?lastName={surname}
 Example: api/v1/students/search?lastName=Eriksson
@@ -40,12 +40,12 @@ Response code: 200 OK
 ```
 
 
-###DELETE
+DELETE
 ```
 -api/v1/students/{id}
 Response code: 200 OK
 ```
-###PUT
+PUT
 ```
 -api/v1/students/{id}
 {
@@ -58,7 +58,7 @@ Response code: 200 OK
 Response code: 201 Created	
 ```
 
-###PATCH
+PATCH
 -api/v1/students/{id}
 ```
 {
