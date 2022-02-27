@@ -77,6 +77,10 @@ public class StudentController {
     @Path("{id}")
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id) {
+        Student foundStudent = service.findById(id);
+        if (foundStudent == null)
+            return Response.ok().build();
+
         service.deleteStudent(id);
         return Response.ok().build();
     }
