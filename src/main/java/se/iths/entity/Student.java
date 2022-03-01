@@ -36,7 +36,6 @@ public class Student {
 
     private String phoneNumber;
 
-
     public Long getId() {
         return id;
     }
