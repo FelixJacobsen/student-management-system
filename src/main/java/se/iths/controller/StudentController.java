@@ -3,7 +3,7 @@ package se.iths.controller;
 
 import se.iths.customexception.ErrorMessageJson;
 import se.iths.customexception.StudentException;
-import se.iths.entity.PhoneNumber;
+import se.iths.entity.StudentPhoneNumber;
 import se.iths.entity.Student;
 import se.iths.service.StudentService;
 
@@ -87,7 +87,7 @@ public class StudentController {
 
     @Path("{id}")
     @PATCH
-    public Response updatePhoneNumber(@PathParam("id") Long id, PhoneNumber phoneNumber) {
+    public Response updatePhoneNumber(@PathParam("id") Long id, StudentPhoneNumber phoneNumber) {
         service.updatePhoneNumber(id, phoneNumber);
         return Response.ok(phoneNumber).build();
 

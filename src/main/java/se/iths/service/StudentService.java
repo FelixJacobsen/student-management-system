@@ -1,6 +1,6 @@
 package se.iths.service;
 
-import se.iths.entity.PhoneNumber;
+import se.iths.entity.StudentPhoneNumber;
 import se.iths.entity.Student;
 
 import javax.persistence.EntityManager;
@@ -56,7 +56,7 @@ public class StudentService {
         return searchLastName.getResultList();
     }
 
-    public void updatePhoneNumber(Long id, PhoneNumber phoneNumber){
+    public void updatePhoneNumber(Long id, StudentPhoneNumber phoneNumber){
         Student newNumber = findById(id);
         newNumber.setPhoneNumber(phoneNumber.getPhoneNumber());
         entityManager.merge(newNumber);

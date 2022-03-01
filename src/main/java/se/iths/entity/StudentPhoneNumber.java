@@ -1,7 +1,6 @@
 package se.iths.entity;
 
 
-import javax.validation.constraints.Size;
 
 
 public class StudentPhoneNumber {
