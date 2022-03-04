@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -35,6 +37,27 @@ public class Student {
     private String email;
 
     private String phoneNumber;
+
+    public Student(){}
+
+    public Student(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    @ManyToMany(mappedBy = "studentList", cascade = CascadeType.ALL)
+    private List<Subject> subjectList = new ArrayList<>();
+
+    public List<Subject> getSubjectList() {
+        return subjectList;
+    }
+
+    public Student setSubjectList(List<Subject> subjectList) {
+        this.subjectList = subjectList;
+        return this;
+    }
 
     public Long getId() {
         return id;
