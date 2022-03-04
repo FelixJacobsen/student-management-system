@@ -44,7 +44,6 @@ public class Teacher {
 
     public void addSubject(Subject subject){
         subjectList.add(subject);
-        subject.getStudentList().add(this);
     }
 
     public Long getId() {

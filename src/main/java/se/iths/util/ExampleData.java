@@ -46,5 +46,18 @@ public class ExampleData {
         Subject subjectCSHarp = new Subject("C#");
         Subject subjectPython = new Subject("Python");
         Subject subjectJavaScript = new Subject("JavaScript");
+
+        teacherAnders.addSubject(subjectJava);
+        teacherAnders.addSubject(subjectCPlusPlus);
+
+        studentNils.addSubject(subjectJava);
+        studentBertil.addSubject(subjectPython);
+        studentYlva.addSubject(subjectCSHarp);
+        studentYlva.addSubject(subjectJavaScript);
+
+        entityManager.persist(teacherAnders);
+        entityManager.persist(studentNils);
+        entityManager.persist(studentBertil);
+        entityManager.persist(studentYlva);
     }
 }
