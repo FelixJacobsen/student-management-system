@@ -19,6 +19,12 @@ public class Subject {
     List<Student> studentList = new ArrayList<>();
 
 
+    public Subject(){}
+
+    public Subject(String name) {
+    }
+
+
     public Long getId() {
         return id;
     }

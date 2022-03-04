@@ -38,9 +38,16 @@ public class Student {
 
     private String phoneNumber;
 
+    public Student(){}
 
+    public Student(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
 
-  @ManyToMany(mappedBy = "studentList", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "studentList", cascade = CascadeType.ALL)
     private List<Subject> subjectList = new ArrayList<>();
 
     public List<Subject> getSubjectList() {
