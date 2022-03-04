@@ -7,6 +7,9 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@NamedQuery(name = "Teacher.findByName",
+            query = "SELECT t FROM Teacher t WHERE t.firstName = :firstName")
 @Entity
 public class Teacher {
 

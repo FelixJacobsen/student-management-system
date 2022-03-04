@@ -4,8 +4,14 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(
+        name = "Subject.findByName",
+        query = "SELECT s FROM Subject s WHERE s.name = :name")
+
 @Entity
 public class Subject {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
