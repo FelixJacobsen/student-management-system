@@ -1,6 +1,7 @@
 package se.iths.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,23 +12,32 @@ import java.util.List;
 @Entity
 public class Subject {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotEmpty
     private String name;
+
+
+    @ManyToMany
+    @JoinTable(name = "",
+            joinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
+    private List<Student> studentList = new ArrayList<>();
+
 
     @ManyToOne
     private Teacher teacher;
 
-    @ManyToMany
-    List<Student> studentList = new ArrayList<>();
-
-
-    public Subject(){}
+    public Subject() {
+    }
 
     public Subject(String name) {
+    }
+
+    public void addStudent(Student student){
+        studentList.add(student);
     }
 
 

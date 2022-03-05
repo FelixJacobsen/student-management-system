@@ -18,22 +18,20 @@ public class ExampleData {
     EntityManager entityManager;
 
     @PostConstruct
-    public void createExampleData(){
-
-        Teacher teacherAnders = new Teacher("Anders","Nilsson",
-                "anders.nilsson@gmail.com","0705030201");
-        Teacher teacherLotta = new Teacher("Lotta","Svensson",
-                "lotta.svensson@gmail.com", "0703020103");
-
-
+    public void generateData() {
 
         Student studentNils = new Student("Nils", "Eriksson",
-                "nils.eriksson@student.se","0701020304");
+                "nils.eriksson@student.se", "0701020304");
         Student studentBertil = new Student("Bertil", "Larsson",
-                "bertil.larsson@student.se","0701003234");
+                "bertil.larsson@student.se", "0701003234");
         Student studentYlva = new Student("Ylva", "Henriksson",
-                "ylva.henriksson@student.se","0777839483");
+                "ylva.henriksson@student.se", "0777839483");
 
+
+        Teacher teacherAnders = new Teacher("Anders", "Nilsson",
+                "anders.nilsson@gmail.com", "0705030201");
+        Teacher teacherLotta = new Teacher("Lotta", "Svensson",
+                "lotta.svensson@gmail.com", "0703020103");
 
 
         Subject subjectJava = new Subject("Java");
@@ -42,15 +40,19 @@ public class ExampleData {
         Subject subjectPython = new Subject("Python");
         Subject subjectJavaScript = new Subject("JavaScript");
 
+
         teacherAnders.addSubject(subjectJava);
         teacherAnders.addSubject(subjectCPlusPlus);
 
-        studentNils.addSubject(subjectJava);
-        studentBertil.addSubject(subjectPython);
-        studentYlva.addSubject(subjectCSHarp);
-        studentYlva.addSubject(subjectJavaScript);
-
         entityManager.persist(teacherAnders);
+
+
+        // studentNils.addSubject(subjectJava);
+        // studentBertil.addSubject(subjectPython);
+        // studentYlva.addSubject(subjectCSHarp);
+        // studentYlva.addSubject(subjectJavaScript);
+
+
         entityManager.persist(studentNils);
         entityManager.persist(studentBertil);
         entityManager.persist(studentYlva);

@@ -36,6 +36,9 @@ public class Student {
     @Email(message = "Not a valid email")
     private String email;
 
+    @ManyToMany(mappedBy = "studentList", cascade = CascadeType.ALL)
+    private List<Subject> subjectList = new ArrayList<>();
+
     private String phoneNumber;
 
     public Student(){}
@@ -47,11 +50,10 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    @ManyToMany(mappedBy = "studentList", cascade = CascadeType.ALL)
-    private List<Subject> subjectList = new ArrayList<>();
 
     public void addSubject(Subject subject){
         subjectList.add(subject);
+        subject.addStudent(this);
     }
 
     public List<Subject> getSubjectList() {

@@ -15,6 +15,7 @@ public class SubjectController {
     @Inject
     SubjectService subjectService;
 
+
     @Path("")
     @POST
     public Response create(Subject subject, @Context UriInfo uriInfo) {
