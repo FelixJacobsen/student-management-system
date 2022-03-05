@@ -20,7 +20,7 @@ public class StudentController {
 
 
     @Inject
-    private StudentService service;
+    StudentService service;
 
     @Path("")
     @POST

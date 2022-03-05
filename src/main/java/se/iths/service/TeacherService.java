@@ -6,7 +6,6 @@ import se.iths.entity.Teacher;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.sql.rowset.spi.TransactionalWriter;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -39,9 +38,9 @@ public class TeacherService {
     }
 
 
-    public List<Teacher> findByName(String name){
+    public List<Teacher> findByLastName(String lastName){
         TypedQuery<Teacher> q = entityManager.createNamedQuery("Teacher.findByName", Teacher.class);
         return q.getResultList();
     }
-    
+
 }

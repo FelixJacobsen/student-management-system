@@ -19,11 +19,6 @@ public class ExampleData {
 
     @PostConstruct
     public void createExampleData(){
-        /**
-         * Example data for demo purposes
-         *
-         */
-
 
         Teacher teacherAnders = new Teacher("Anders","Nilsson",
                 "anders.nilsson@gmail.com","0705030201");
