@@ -38,6 +38,7 @@ public class Subject {
 
     public void addStudent(Student student){
         studentList.add(student);
+        student.addSubject(this);
     }
 
 
