@@ -5,6 +5,18 @@
 Simple JAX-RS application that runs on a Payara local server. Includes a "student" entity with CRUD functionality.
 To use this application you simply need to clone/fork this projekt, download Payara and add it to the project configuration. Insomnia can be used for sending requests and alternate the data. 
 
+## Laboration 2
+```
+
+Issues
+
+- Student -> Subject was in a infinite loop. Got help from Patrik Fallqvist and divided the "add" methods into two.
+- The order in the example data class had to be in a specific order
+
+
+```
+
+
 
 # Endpoints
 POST
