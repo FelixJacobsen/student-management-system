@@ -21,60 +21,64 @@ public class Subject {
 
 
     @ManyToMany
-    @JoinTable(name = "",
+    @JoinTable(name = "student_courses",
             joinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
     private List<Student> studentList = new ArrayList<>();
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Teacher teacher;
 
     public Subject() {
     }
 
     public Subject(String name) {
+        this.name = name;
     }
 
-    public void addStudent(Student student){
-        studentList.add(student);
-        student.addSubject(this);
-    }
+
 
 
     public Long getId() {
         return id;
     }
 
-    public Subject setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public Subject setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return this;
     }
 
     public Teacher getTeacher() {
         return teacher;
     }
 
-    public Subject setTeacher(Teacher teacher) {
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
-        return this;
+        teacher.addOnlySubject(this);
     }
 
     public List<Student> getStudentList() {
         return studentList;
     }
 
-    public Subject setStudentList(List<Student> studentList) {
+    public void setStudentList(List<Student> studentList) {
         this.studentList = studentList;
-        return this;
+    }
+
+    public void addStudent(Student student){
+        studentList.add(student);
+        student.addOnlySubject(this);
+    }
+
+    public void addOnlyStudent(Student student) {
+        studentList.add(student);
     }
 }

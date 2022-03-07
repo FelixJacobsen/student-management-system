@@ -1,7 +1,7 @@
 package se.iths.entity;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -25,30 +25,20 @@ public class Teacher {
     @Size(min = 2)
     private String lastName;
 
-    @Email
-    private String email;
 
-    private String phoneNumber;
-
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private List<Subject> subjectList = new ArrayList<>();
 
 
-    public Teacher(String firstName, String lastName, String email, String phoneNumber) {
+    public Teacher(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
     }
 
     public Teacher() {
 
     }
 
-    public void addSubject(Subject subject){
-        subjectList.add(subject);
-        subject.setTeacher(this);
-    }
 
     public Long getId() {
         return id;
@@ -77,30 +67,24 @@ public class Teacher {
         return this;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public Teacher setEmail(String email) {
-        this.email = email;
-        return this;
-    }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public Teacher setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        return this;
-    }
-
+    @JsonbTransient
     public List<Subject> getSubjectList() {
         return subjectList;
     }
 
-    public Teacher setSubjectList(List<Subject> subjectList) {
+    public void setSubjectList(List<Subject> subjectList) {
         this.subjectList = subjectList;
-        return this;
     }
+
+    public void addOnlySubject(Subject subject){
+        subjectList.add(subject);
+    }
+
+    public void addSubject(Subject subject){
+        subjectList.add(subject);
+        subject.setTeacher(this);
+    }
+
 }

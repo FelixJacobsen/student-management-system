@@ -1,7 +1,7 @@
 package se.iths.entity;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -33,7 +33,6 @@ public class Student {
     private String lastName;
 
     @NotEmpty(message = "Cannot be empty")
-    @Email(message = "Not a valid email")
     private String email;
 
     @ManyToMany(mappedBy = "studentList", cascade = CascadeType.ALL)
@@ -41,7 +40,7 @@ public class Student {
 
     private String phoneNumber;
 
-    public Student(){}
+
 
     public Student(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
@@ -50,12 +49,10 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
+    public Student(){}
 
-    public void addSubject(Subject subject){
-        subjectList.add(subject);
-        subject.addStudent(this);
-    }
 
+    @JsonbTransient
     public List<Subject> getSubjectList() {
         return subjectList;
     }
@@ -104,4 +101,16 @@ public class Student {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public void addSubject(Subject subject){
+        subjectList.add(subject);
+        subject.addOnlyStudent(this);
+    }
+
+    public void addOnlySubject(Subject subject){
+       subjectList.add(subject);
+    }
+
+
+
 }
