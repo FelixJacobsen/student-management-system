@@ -46,9 +46,7 @@ public class ExampleData {
         subject1.addStudent(student1);
         subject1.addStudent(student2);
         subject3.addStudent(student3);
-        //   subject4.addStudent(student1);
-       //     subject5.addStudent(student3);
-
+        
 
         entityManager.persist(teacher1);
         entityManager.persist(teacher2);
@@ -57,9 +55,8 @@ public class ExampleData {
         subject2.setTeacher(teacher2);
         subject3.setTeacher(teacher2);
 
-
         entityManager.persist(subject1);
-       entityManager.persist(subject2);
+        entityManager.persist(subject2);
         entityManager.persist(subject3);
         entityManager.persist(subject4);
         entityManager.persist(subject5);
